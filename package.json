@@ -1,0 +1,24 @@
+{
+  "name": "current-time",
+  "version": "0.0.1",
+  "description": "Command line tool to display the current time (and possibly weather) on a given city.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviferreira/current-time"
+  },
+  "keywords": [
+    "time",
+    "weather",
+    "current-time"
+  ],
+  "author": "Davi Ferreira <hi@daviferreira.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daviferreira/current-time/issues"
+  },
+  "homepage": "https://github.com/daviferreira/current-time"
+}
