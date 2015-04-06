@@ -8,21 +8,21 @@ var currentTime = require('./');
 var cli = meow({
   help: [
     'Usage',
-    '  $ current-time [place]',
+    '  $ current-time [places]',
     '',
     'Example',
     '  $ current-time brasil',
-    '  $ current-time cph, rio de janeiro, lisbon'
+    '  $ current-time copenhagen, rio de janeiro, lisbon'
   ].join('\n')
 }, {
   string: ['_']
 });
 
-var place = cli.input[0];
+var places = cli.input;
 
-if (place) {
-  return currentTime(place);
+if (places.length > 0) {
+  return currentTime.init(places);
 }
 
-console.error('Invalid place');
+console.error('Invalid places');
 process.exit(1);
