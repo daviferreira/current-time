@@ -1,8 +1,11 @@
 {
   "name": "current-time",
   "version": "0.0.1",
-  "description": "Command line tool to display the current time (and possibly weather) on a given city.",
+  "description": "Command line tool to display the current time (and possibly weather) on a given location.",
   "main": "index.js",
+  "bin": {
+    "current-time": "cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/daviferreira/current-time/issues"
   },
-  "homepage": "https://github.com/daviferreira/current-time"
+  "homepage": "https://github.com/daviferreira/current-time",
+  "dependencies": {
+    "meow": "^3.1.0"
+  }
 }
