@@ -1,5 +1,6 @@
 'use strict';
 
+var parseString = require('xml2js').parseString;
 var request = require('superagent');
 
 module.exports = {
@@ -13,19 +14,36 @@ module.exports = {
       request
         .get('http://api.openweathermap.org/data/2.5/weather')
         .query({ q: place.trim() })
+        .end(this.getCurrentTime);
+    }.bind(this));
+  },
+
+  getCurrentTime: function (err, res) {
+    if (err) {
+      console.error(err);
+    } else {
+      var place = res.body.name;
+      var temperature = (res.body.main.temp - 273.15).toFixed(1);
+      var weather = res.body.weather[0].description;
+      var lon = res.body.coord.lon;
+      var lat = res.body.coord.lat;
+      request
+        .get('http://www.earthtools.org/timezone/' + lon + '/' + lat)
+        .buffer()
+        .type('xml')
         .end(function (err, res) {
           if (err) {
-            console.error(err);
+            console.error('error');
           } else {
-            console.log(' --- ');
-            console.log(place);
-            console.log(res.body.coord);
-            console.log(res.body.weather);
-            console.log(res.body.main);
-            console.log(res.body.main.temp - 273.15); // if celsius
-            console.log(' --- ');
+            parseString(res.text, function (err, result) {
+              console.log(result.timezone.isotime[0]);
+              console.log(place);
+              console.log(temperature); // kelvin => celsius
+              console.log(weather);
+              console.log(' ### ');
+            });
           }
         });
-    });
+    }
   }
 };
